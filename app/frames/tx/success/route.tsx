@@ -7,7 +7,7 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       <div tw="flex flex-col">
-        <div tw="flex flex-col">All requests completed</div>
+        <div tw="flex flex-col">All requests completed!</div>
       </div>
     ),
     buttons: [],

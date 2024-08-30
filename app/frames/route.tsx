@@ -1,7 +1,7 @@
 import { Button } from "frames.js/next";
 import { frames } from "./frames";
 
-const handleRequest = frames(async (ctx) => {
+const handleRequest = frames(() => {
   return {
     image: (
       <div
@@ -13,7 +13,6 @@ const handleRequest = frames(async (ctx) => {
         Brian Agent XMTP Frame
       </div>
     ),
-    textInput: "Type something here",
     buttons: [],
   };
 });
