@@ -10,26 +10,11 @@ const handleRequest = frames(async (ctx) => {
           flexDirection: "column",
         }}
       >
-        Open Frames - Frames.js Starter
+        Brian Agent XMTP Frame
       </div>
     ),
     textInput: "Type something here",
-    buttons: [
-      <Button
-        action="link"
-        target={
-          "https://github.com/builders-garden/open-frames-starter-framesjs"
-        }
-      >
-        Link
-      </Button>,
-      <Button action="post" target={"/post"}>
-        Post
-      </Button>,
-      <Button action="tx" target={"/tx"} post_url={"/tx/success"}>
-        Tx
-      </Button>,
-    ],
+    buttons: [],
   };
 });
 

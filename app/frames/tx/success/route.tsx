@@ -7,14 +7,10 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       <div tw="flex flex-col">
-        <div tw="flex flex-col">Successfully transfered 1 USDC</div>
+        <div tw="flex flex-col">All requests completed</div>
       </div>
     ),
-    buttons: [
-      <Button action="post" target={"/"}>
-        Back
-      </Button>,
-    ],
+    buttons: [],
   };
 });
 
