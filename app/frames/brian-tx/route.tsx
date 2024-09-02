@@ -26,10 +26,22 @@ const handleRequest = frames(async (ctx) => {
   const stepsLength = txData.requests[request].stepsLength;
   const requestsLength = txData.requestsLength;
 
+  // Get the description of the request and set the font size based on its length
+  const requestDescription = txData.requests[request].description;
+  const fontSize = requestDescription.length > 180 ? "29px" : "37px";
+
   return {
+    title: "Request manager",
     image: (
-      <div tw="flex flex-col">
-        <div tw="flex p-10">{txData.requests[request].description}</div>
+      <div
+        tw="flex w-full h-full"
+        style={{
+          backgroundImage: `url("${process.env.NEXT_PUBLIC_BASE_URL}/images/request.png")`,
+        }}
+      >
+        <div tw="flex text-white px-18 py-32" style={{ fontSize }}>
+          {requestDescription}
+        </div>
       </div>
     ),
     buttons: [
