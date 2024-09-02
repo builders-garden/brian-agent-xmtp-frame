@@ -1,15 +1,14 @@
 import { farcasterHubContext, openframes } from "frames.js/middleware";
 import { createFrames } from "frames.js/next";
 import { isXmtpFrameActionPayload, getXmtpFrameMessage } from "frames.js/xmtp";
+import * as fs from "node:fs/promises";
+import * as path from "node:path";
 
 export type State = {
   count: number;
 };
 
 export const frames = createFrames<State>({
-  initialState: {
-    count: 0,
-  },
   basePath: "/frames",
   middleware: [
     farcasterHubContext({
@@ -42,4 +41,31 @@ export const frames = createFrames<State>({
       },
     }),
   ],
+  imageRenderingOptions: async () => {
+    const interFontData = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/Inter-Regular.ttf`
+    ).then((res) => res.arrayBuffer());
+
+    return {
+      imageOptions: {
+        sizes: {
+          "1.91:1": {
+            width: 955,
+            height: 500,
+          },
+          "1:1": {
+            width: 500,
+            height: 500,
+          },
+        },
+        fonts: [
+          {
+            name: "Inter",
+            data: interFontData,
+            weight: 400,
+          },
+        ],
+      },
+    };
+  },
 });
