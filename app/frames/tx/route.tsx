@@ -37,7 +37,7 @@ export const POST = frames(async (ctx) => {
       abi: erc20Abi as Abi,
       to: currentStep.to,
       data: currentStep.data,
-      value: currentStep.value,
+      value: currentStep.value.toString(),
     },
   });
 });
