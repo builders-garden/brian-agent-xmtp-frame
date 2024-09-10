@@ -10,6 +10,9 @@ export interface Request {
   description: string;
   chainId: number;
   tokenIn: `0x${string}`;
+  tokenAmount: string;
+  tokenDecimals: number;
+  tokenSymbol: string;
   steps: Step[];
   stepsLength: number;
 }

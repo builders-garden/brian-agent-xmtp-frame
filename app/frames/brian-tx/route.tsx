@@ -3,6 +3,8 @@ import { frames } from "../frames";
 import { getRedisClient } from "@/lib/redis";
 import { TransactionsDataType } from "@/lib/types";
 import { getPublicClient } from "@/lib/utils";
+import { formatUnits } from "viem";
+import { nativeAddress } from "@/lib/const";
 
 const handleRequest = frames(async (ctx) => {
   const redisId = ctx.url.searchParams.get("id");
@@ -166,6 +168,15 @@ const handleRequest = frames(async (ctx) => {
   const currentRequest = txData.requests[request];
   const stepsLength = currentRequest.stepsLength;
 
+  // Get the tokenIn, the tokenAmount, the tokenSymbol and the action from the current request
+  const tokenIn = currentRequest.tokenIn;
+  const tokenAmount = formatUnits(
+    BigInt(currentRequest.tokenAmount),
+    currentRequest.tokenDecimals
+  );
+  const tokenSymbol = currentRequest.tokenSymbol;
+  const action = txData.requests[request].action;
+
   // Get the description of the request and set the font size based on its length
   const requestDescription = currentRequest.description;
   const fontSize = requestDescription.length > 180 ? "29px" : "37px";
@@ -180,7 +191,12 @@ const handleRequest = frames(async (ctx) => {
         }}
       >
         <div tw="flex text-white px-18 py-32" style={{ fontSize }}>
-          {requestDescription}
+          {tokenIn !== nativeAddress &&
+          step === 0 &&
+          stepsLength > 1 &&
+          parseFloat(tokenAmount) > 0
+            ? `You are about to approve the spending of ${tokenAmount} ${tokenSymbol} for your ${action} request`
+            : requestDescription}
         </div>
       </div>
     ),
