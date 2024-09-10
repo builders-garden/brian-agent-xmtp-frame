@@ -31,7 +31,7 @@ export const POST = frames(async (ctx) => {
   const currentStep = currentRequest.steps[step];
   // Return the transaction frame
   return transaction({
-    chainId: `eip155:${currentRequest.chainId}`, // Base Mainnet is 8453
+    chainId: `eip155:${currentRequest.chainId}`, // Base Mainnet is 8453 chain id
     method: "eth_sendTransaction",
     params: {
       abi: erc20Abi as Abi,
